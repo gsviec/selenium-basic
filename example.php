@@ -31,7 +31,6 @@ $driver = RemoteWebDriver::create($host, $capabilities, 5000);
 // navigate to 'http://www.seleniumhq.org/'
 $driver->get('https://lackky.com/read-blog/125_chuyen-gioi-cho-meo.html');
 
-var_dump($driver);
 // adding cookie
 $driver->manage()->deleteAllCookies();
 
@@ -50,14 +49,21 @@ print_r($cookies);
 // using the browser shortcut to create a new tab
 $driver->getKeyboard()->sendKeys(array(WebDriverKeys::CONTROL, 't'));
 // navigate to 'http://www.seleniumhq.org/'
-	$driver->get('https://lackky.com/read-blog/58_ta-i-sao-google-chi-cho-phe-p-di-la-m-mang-theo-cu-n.html');
+$driver->get('https://lackky.com/read-blog/58_ta-i-sao-google-chi-cho-phe-p-di-la-m-mang-theo-cu-n.html');
 
-$elements = $driver->findElements(WebDriverBy::cssSelector('ul.popular-articles > li'));
+//$elements = $driver->findElements(WebDriverBy::cssSelector('ul.popular-articles > li'));
+$elements = $driver->findElements(WebDriverBy::xpath("//a[@href]"));
+
 // $elements is now array - containing instances of RemoteWebElement (or empty, if no element is found)
 
-// foreach ($elements as $element) {
-// 	$d = $element->findElement(WebDriverBy::cssSelector('.article-thumbnail'));
-// }
+foreach ($elements as $element) {
+	//$d = $element->findElement(WebDriverBy::cssSelector('.article-thumbnail'));
+
+	echo $element->getAttribute('href') . "\n";
+	$driver->get('https://lackky.com/read-blog/58_ta-i-sao-google-chi-cho-phe-p-di-la-m-mang-theo-cu-n.html');
+
+
+}
 // // wait until the page is loaded
 // $driver->wait()->until(
 //     WebDriverExpectedCondition::titleContains('About')
