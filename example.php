@@ -25,7 +25,10 @@ require_once('vendor/autoload.php');
 
 // start Chrome with 5 second timeout
 $host = 'http://35.225.149.118:4444/wd/hub'; // this is the default
-$capabilities = DesiredCapabilities::chrome();
+//$capabilities = DesiredCapabilities::chrome();
+$capabilities = [
+	"platform"=>"Windows 7", "browserName"=>"chrome", "enableVNC" => true
+];
 $driver = RemoteWebDriver::create($host, $capabilities, 5000);
 
 // navigate to 'http://www.seleniumhq.org/'
@@ -56,14 +59,14 @@ $elements = $driver->findElements(WebDriverBy::xpath("//a[@href]"));
 
 // $elements is now array - containing instances of RemoteWebElement (or empty, if no element is found)
 
-foreach ($elements as $element) {
-	//$d = $element->findElement(WebDriverBy::cssSelector('.article-thumbnail'));
+// foreach ($elements as $element) {
+// 	//$d = $element->findElement(WebDriverBy::cssSelector('.article-thumbnail'));
 
-	echo $element->getAttribute('href') . "\n";
-	$driver->get('https://lackky.com/read-blog/58_ta-i-sao-google-chi-cho-phe-p-di-la-m-mang-theo-cu-n.html');
+// 	echo $element->getAttribute('href') . "\n";
+// 	$driver->get('https://lackky.com/read-blog/58_ta-i-sao-google-chi-cho-phe-p-di-la-m-mang-theo-cu-n.html');
 
 
-}
+// }
 // // wait until the page is loaded
 // $driver->wait()->until(
 //     WebDriverExpectedCondition::titleContains('About')

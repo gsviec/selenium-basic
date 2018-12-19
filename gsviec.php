@@ -24,7 +24,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 require_once('vendor/autoload.php');
 
 // start Chrome with 5 second timeout
-$host = 'http://192.168.9.140:4444/wd/hub'; // this is the default
+$host = 'http://35.225.149.118:4444/wd/hub'; // this is the default
 $capabilities = DesiredCapabilities::chrome();
 
 $capabilities = [
@@ -51,12 +51,28 @@ print_r($cookies);
 // $link->click();
 
 $driver->get('https://gsviec.com/playlist/khoa-hoc-php-can-ban');
-sleep(1200);
+
+$confirmBtn = $driver->wait()->until(
+        WebDriverExpectedCondition::elementToBeClickable(
+            //WebDriverBy::xpath('//*[@id="userCommand"]/div[2]/div[2]/button')
+            WebDriverBy::className('js-hide-modal-subscribe')
+        )
+    );
+
+   $confirmBtn->click();
+	// $link = $driver->findElement(
+	//     WebDriverBy::className('js-hide-modal-subscribe')
+	// );
+	// var_dump($link);
+	// $link->click();
+
+sleep(30);
 
 // using the browser shortcut to create a new tab
-// $driver->getKeyboard()->sendKeys(array(WebDriverKeys::CONTROL, 't'));
-// // navigate to 'http://www.seleniumhq.org/'
-// $driver->get('https://lackky.com/');
+$driver->getKeyboard()->sendKeys(array(WebDriverKeys::CONTROL, 't'));
+// navigate to 'http://www.seleniumhq.org/'
+$driver->get('https://gsviec.com/watch?v=kL5');
+sleep(80);
 
 //$elements = $driver->findElements(WebDriverBy::cssSelector('ul.popular-articles > li'));
 // $elements = $driver->findElements(WebDriverBy::xpath("//a[contains(@href,'watch')]"));
@@ -108,4 +124,4 @@ sleep(1200);
 // );
 
 // close the browser
-//$driver->quit();
+$driver->quit();
