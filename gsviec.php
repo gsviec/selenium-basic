@@ -66,13 +66,34 @@ $confirmBtn = $driver->wait()->until(
 	// var_dump($link);
 	// $link->click();
 
-sleep(30);
-
 // using the browser shortcut to create a new tab
-$driver->getKeyboard()->sendKeys(array(WebDriverKeys::CONTROL, 't'));
+//$driver->getKeyboard()->sendKeys(array(WebDriverKeys::CONTROL, 't'));
 // navigate to 'http://www.seleniumhq.org/'
-$driver->get('https://gsviec.com/watch?v=kL5');
-sleep(80);
+$driver->get('https://gsviec.com/watch?v=wo1&list=khoa-hoc-phalcon-can-ban');
+$driver->getKeyboard()->sendKeys(array(WebDriverKeys::CONTROL, 't'));
+$els = $driver->findElements(WebDriverBy::xpath("//a[contains(@href,'watch')]"));
+// foreach ($els as $key => $el) {
+// 	$el->click();
+// 	# code...
+// }
+$el[0]->click();
+$el[2]->click();
+
+// //click the link 'About'
+// $link = $driver->findElement(
+//     WebDriverBy::className('adblock')
+// );
+// var_dump($link);
+
+// $my_frame = $driver->findElement(WebDriverBy::id('google_ads_frame1'));
+
+// var_dump($my_frame);
+
+// $link->click();
+
+$handles = $driver->getWindowHandles();
+$driver->switchTo()->window(end($handles));
+sleep(30);
 
 //$elements = $driver->findElements(WebDriverBy::cssSelector('ul.popular-articles > li'));
 // $elements = $driver->findElements(WebDriverBy::xpath("//a[contains(@href,'watch')]"));
